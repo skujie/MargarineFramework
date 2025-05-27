@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.UIElements;
 
 public class TextToTMP : EditorWindow
 {
@@ -18,16 +14,27 @@ public class TextToTMP : EditorWindow
         TextToTMP window = (TextToTMP)EditorWindow.GetWindow(typeof(TextToTMP));
         window.Show();
     }
-
-    private Transform root;
+    private Transform _root;
+    private Transform Root
+    {
+        get => _root;
+        set
+        {
+            if (value != _root)
+            {
+                texts = value.GetComponentsInChildren<Text>(true);
+            }
+            _root = value;
+        }
+    }
     private Text[] texts;
     void OnGUI()
     {
         //font = (TMP_FontAsset)EditorGUILayout.ObjectField("font", font, typeof(TMP_FontAsset), true);
-        root = (Transform)EditorGUILayout.ObjectField("Root", root, typeof(Transform), true); //Set the root to get the Texts
-        if (root == null) return; //FLAG : root object needed
+        Root = (Transform)EditorGUILayout.ObjectField("Root", Root, typeof(Transform), true); //Set the root to get the Texts
+        if (Root == null) return; //FLAG : root object needed
         
-        if (GUILayout.Button("Get Texts")) texts = root.GetComponentsInChildren<Text>(true); // Get all Texts
+        //if (GUILayout.Button("Get Texts")) texts = Root.GetComponentsInChildren<Text>(true); // Get all Texts
         if (texts == null || texts.Length <= 0) return;
 
         if (GUILayout.Button("Instantiate TMP")) // Create TMPs
