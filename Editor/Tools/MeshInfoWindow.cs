@@ -50,7 +50,6 @@ public class MeshInfoWindow : EditorWindow
         GUILayout.Label($"Polygones: {_polyCount}");
         GUILayout.Label($"Meshes: {_meshCount}");
         GUILayout.Label($"SkinnedMeshes: {_skinMeshCount}");
-        GUILayout.Label(Screen.width.ToString() + " x " + Screen.height.ToString());
 
         ////////////////////
         GUILayout.Space(5f);
