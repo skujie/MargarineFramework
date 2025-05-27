@@ -83,11 +83,13 @@ public class MeshInfoWindow : EditorWindow
 
         if (EditorPrefs.HasKey(_editPrefsDestroyAfterBake))
             _destroyAfterBake = EditorPrefs.GetBool(_editPrefsDestroyAfterBake);
+
+        Selection.selectionChanged += Repaint;
     }
 
     private void OnDisable()
     {
-        
+        Selection.selectionChanged -= Repaint;
     }
     #endregion
 
